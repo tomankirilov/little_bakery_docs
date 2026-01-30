@@ -1,0 +1,8 @@
+Windows Power Shell:
+
+First instance:
+py -m mkdocs build -d site
+py -m http.server 8000 --directory site
+
+Second instance:
+while ($true) { py -m mkdocs build -d site --dirty; Start-Sleep -Seconds 2 }

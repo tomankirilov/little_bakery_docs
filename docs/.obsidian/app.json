@@ -3,5 +3,8 @@
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "./_res",
   "alwaysUpdateLinks": true,
-  "newLinkFormat": "absolute"
+  "newLinkFormat": "absolute",
+  "smartIndentList": false,
+  "useTab": false,
+  "promptDelete": false
 }

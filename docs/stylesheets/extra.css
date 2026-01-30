@@ -1,0 +1,131 @@
+/* Justify content paragraphs */
+.rst-content p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Warm, low-contrast dark mode */
+@media (prefers-color-scheme: dark) {
+
+    /* Background + text (warm charcoal) */
+    body,
+    .wy-body-for-nav {
+        background: #22201d;
+        color: #d2ccc3;
+    }
+
+    .wy-nav-content {
+        background: #22201d;
+    }
+
+    .rst-content {
+        color: #d2ccc3;
+    }
+
+    /* Left navigation */
+    .wy-nav-side {
+        background: #1c1a18;
+    }
+
+    .wy-side-nav-search {
+        background: #1c1a18;
+        border-bottom: 1px solid #2f2b26;
+    }
+
+    /* Make ANY expanded section background dark (this fixes the bright block) */
+    .wy-menu-vertical li.current>ul,
+    .wy-menu-vertical li.current ul,
+    .wy-menu-vertical ul,
+    .wy-menu-vertical li.toctree-l1.current>ul {
+        background: #1c1a18 !important;
+    }
+
+    /* Default nav links */
+    .wy-menu-vertical a {
+        color: #c7c0b6;
+        background: transparent;
+    }
+
+    /* Non-selected items inside the open/current section */
+    .wy-menu-vertical li.current ul li a {
+        background: #1c1a18 !important;
+        color: #c7c0b6 !important;
+    }
+
+    /* Hover */
+    .wy-menu-vertical a:hover {
+        background: #2a2622 !important;
+        color: #e0d8ce !important;
+    }
+
+    /* Selected/current item slightly brighter than the rest */
+    .wy-menu-vertical li.current>a,
+    .wy-menu-vertical li.current>a:hover,
+    .wy-menu-vertical li.toctree-l1.current>a,
+    .wy-menu-vertical li.toctree-l1.current>a:hover,
+    .wy-menu-vertical li.toctree-l2.current>a,
+    .wy-menu-vertical li.toctree-l2.current>a:hover {
+        background: #333029 !important;
+        /* slightly brighter */
+        color: #efe6db !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Links (warm) */
+    .rst-content a,
+    .rst-content a:visited {
+        color: #caa97a;
+    }
+
+    .rst-content a:hover {
+        color: #d8ba8f;
+    }
+
+    /* Headings */
+    .rst-content h1,
+    .rst-content h2,
+    .rst-content h3,
+    .rst-content h4,
+    .rst-content h5,
+    .rst-content h6 {
+        color: #e8dfd4;
+    }
+
+    /* Code blocks */
+    .rst-content pre,
+    .rst-content code,
+    code {
+        background: #1c1a18 !important;
+        color: #d2ccc3 !important;
+        border: 1px solid #2f2b26 !important;
+    }
+
+    /* Tables */
+    .rst-content table.docutils th,
+    .rst-content table.docutils td {
+        border-color: #2f2b26;
+    }
+
+    /* Admonitions */
+    .rst-content .admonition {
+        background: #1c1a18;
+        border-left: 4px solid #caa97a;
+    }
+}

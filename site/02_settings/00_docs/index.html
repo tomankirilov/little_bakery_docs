@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Little Bakery - LittleBakery Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Little Bakery";
+        var mkdocs_page_input_path = "02_settings\\00_docs.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> LittleBakery Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_getting-started/installation/">Installation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Global Settings</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_rendering/">Rendering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_bake-targets/">Bake Targets</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_projection/">Projection</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_output/">Output</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">LittleBakery Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Little Bakery</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="little-bakery">Little Bakery<a class="headerlink" href="#little-bakery" title="Permanent link">&para;</a></h1>
+<p>Little Bakery is a Blender add-on focused on baking textures for <strong>real-time rendering</strong> workflows. It bakes to the <strong>active UV map</strong> and does <strong>not</strong> support UDIMs.</p>
+<p>The core workflow is:</p>
+<ol>
+<li>Configure <strong>Global Settings</strong> (rendering, bake targets, projection, output)</li>
+<li>Create one or more <strong>Texture Sets</strong> (similar to a “material set” in Substance Painter)</li>
+<li>Add <strong>Targets</strong> (meshes that receive the bake)</li>
+<li>Optionally add <strong>Sources</strong> per Target (meshes that are projected onto the target)</li>
+<li>Press <strong>BAKE</strong></li>
+</ol>
+<hr />
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="bake-targets">Bake Targets<a class="headerlink" href="#bake-targets" title="Permanent link">&para;</a></h3>
+<p>Bake Targets define <strong>which texture types</strong> are produced (Normal, AO, Curvature, etc.).<br />
+The bake target name is used as the <strong>export suffix</strong>.</p>
+<h3 id="texture-sets">Texture Sets<a class="headerlink" href="#texture-sets" title="Permanent link">&para;</a></h3>
+<p>A Texture Set represents a group of baked outputs (think “material set”).<br />
+Each Texture Set produces <strong>one output image per Bake Target</strong>.</p>
+<p>Texture Sets can override:
+- selected render settings (resolution, AA, padding)
+- bake targets (add or replace vs global targets)</p>
+<h3 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h3>
+<p>Targets are the meshes that are baked <strong>onto</strong> (the receiving/low-poly side).<br />
+All Targets within the same Texture Set are baked into the same output image for each Bake Target.</p>
+<h3 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h3>
+<p>Each Target can have:
+- <strong>no Sources</strong> → the Target is treated as both <strong>source and target</strong>
+- <strong>one or more Sources</strong> → Sources are projected onto the Target</p>
+<hr />
+<h2 id="global-settings">Global Settings<a class="headerlink" href="#global-settings" title="Permanent link">&para;</a></h2>
+<h3 id="rendering">Rendering<a class="headerlink" href="#rendering" title="Permanent link">&para;</a></h3>
+<h4 id="rendering-device">Rendering Device<a class="headerlink" href="#rendering-device" title="Permanent link">&para;</a></h4>
+<p>Textures can be baked on the <strong>CPU</strong> or <strong>GPU</strong>. To use the GPU, Cycles must be configured with a compatible device:</p>
+<p><code>Edit &gt; Preferences &gt; System &gt; Cycles Render Devices</code></p>
+<h4 id="resolution">Resolution<a class="headerlink" href="#resolution" title="Permanent link">&para;</a></h4>
+<p>Final output texture resolution used for baking.</p>
+<h4 id="anti-aliasing">Anti-Aliasing<a class="headerlink" href="#anti-aliasing" title="Permanent link">&para;</a></h4>
+<p>Improves edge quality (mainly along geometry and UV island borders) by baking at a higher resolution and scaling down.</p>
+<ul>
+<li><strong>MSAA x2</strong></li>
+<li><strong>MSAA x4</strong></li>
+<li><strong>MSAA x8</strong></li>
+</ul>
+<p>Note: Higher MSAA increases bake time and memory usage. Padding is also computed at the higher resolution, which can slow padding down.</p>
+<h4 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h4>
+<p>Padding (edge padding / bleed) extends pixels beyond UV island borders to prevent seams when mipmaps or texture filtering sample outside UV shells.</p>
+<p>Padding is applied as a post-process and supports three algorithms:</p>
+<ul>
+<li><strong>Fast:</strong> Expands pixels in 4 directions. Very fast, especially for small padding values.</li>
+<li><strong>Chamfer:</strong> Expands pixels in 8 directions. Slightly slower, generally more accurate than Fast.</li>
+<li><strong>EDT:</strong> Euclidean Distance Transform. Produces the most consistent padding, typically at higher cost.</li>
+</ul>
+<p>Padding Distance controls how far pixels are extended. The algorithms are designed to be fast, so large padding values are generally practical.</p>
+<hr />
+<h3 id="bake-targets_1">Bake Targets<a class="headerlink" href="#bake-targets_1" title="Permanent link">&para;</a></h3>
+<p>Bake Targets are managed as a list:
+- add / remove items
+- reorder items (up/down)
+- rename targets (double-click)</p>
+<p>The bake target <strong>name</strong> determines the exported texture suffix.<br />
+A separator can be configured in add-on preferences (default: <code>_</code>).</p>
+<h4 id="normal">Normal<a class="headerlink" href="#normal" title="Permanent link">&para;</a></h4>
+<p>Bakes a normal map.</p>
+<ul>
+<li><strong>Space-Tangent:</strong> Tangent-space normals (commonly used for real-time/game assets).</li>
+<li><strong>Space-Object:</strong> Object-space normals (commonly used for static/offline workflows).</li>
+<li><strong>Swizzle:</strong> Remaps normal directions <strong>X, Y, Z</strong> to output channels <strong>R, G, B</strong>.</li>
+</ul>
+<p>Note: Normal baking can be influenced by source shading if the source material uses <strong>bump/normal</strong> inputs.</p>
+<h4 id="ambient-occlusion">Ambient Occlusion<a class="headerlink" href="#ambient-occlusion" title="Permanent link">&para;</a></h4>
+<p>Bakes an <strong>Ambient Occlusion (AO)</strong> map: how much ambient light is blocked by nearby geometry. Creases and tight gaps bake darker; open areas bake lighter.</p>
+<ul>
+<li><strong>Ray Count:</strong> Number of AO rays cast per texel. Higher reduces noise but increases bake time.</li>
+<li><strong>Render Samples:</strong> Cycles sample count used for the bake. Higher reduces noise but increases bake time.</li>
+<li><strong>Distance:</strong> Maximum ray length used to find occluders. Lower emphasizes small creases; higher captures broader occlusion.</li>
+<li><strong>Contrast:</strong> Adjusts the AO intensity distribution.</li>
+</ul>
+<p><strong>AO Mode</strong> controls which objects are considered for occlusion:</p>
+<ul>
+<li><strong>Global:</strong> AO considers <strong>all objects in the scene</strong>.</li>
+<li><strong>Set:</strong> AO considers <strong>only objects that belong to the Texture Set</strong>:</li>
+<li>all Sources</li>
+<li>Targets that have no Sources (since they act as their own Source)</li>
+<li><strong>Local:</strong> AO considers <strong>only the Sources attached to the current Target</strong>.
+  Sources from other Targets are excluded.</li>
+<li><strong>Isolated:</strong> AO is computed <strong>per Source</strong>, where each Source is <strong>self-occluding only</strong>.
+  (No other objects contribute to the occlusion for that Source.)</li>
+</ul>
+<p>AO is geometry-based (materials do not affect it).</p>
+<h4 id="curvature">Curvature<a class="headerlink" href="#curvature" title="Permanent link">&para;</a></h4>
+<p>Bakes a <strong>Curvature</strong> map: where the surface is <strong>convex</strong> (edges/ridges) or <strong>concave</strong> (valleys). Useful for edge wear, dirt buildup, stylized shading, and masking.</p>
+<ul>
+<li><strong>Exponent (Default 2.2):</strong> Applies a gamma-style correction so the map is easier to blend in typical color workflows.
+  With <strong>2.2</strong>, <em>neutral curvature</em> (flat / no curvature) maps to <strong>50% gray</strong>.
+  With <strong>1.0</strong>, the neutral point is not at 50% gray.</li>
+<li><strong>Contrast:</strong> Applied to the <strong>raw curvature values before baking</strong> (pre-encoding).
+  This increases or decreases separation between edges and flats <strong>without compressing</strong> the raw data,
+  while preserving a stable neutral midpoint (50% gray after the exponent step).</li>
+</ul>
+<p>Curvature is geometry-based (materials do not affect it).</p>
+<h4 id="thickness">Thickness<a class="headerlink" href="#thickness" title="Permanent link">&para;</a></h4>
+<p>Bakes a <strong>Thickness</strong> map: approximate distance from the surface to the opposite side of the mesh (how “thick” the object is). Commonly used for translucency or subsurface-scattering masks.</p>
+<ul>
+<li><strong>Ray Count:</strong> Number of rays cast per texel. Higher reduces noise but increases bake time.</li>
+<li><strong>Render Samples:</strong> Cycles sample count used for the bake. Higher reduces noise but increases bake time.</li>
+<li><strong>Distance:</strong> Maximum thickness to search for. Lower emphasizes thin features; higher captures thicker volumes.</li>
+</ul>
+<h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
+<p>Generates a texture storing the <strong>X, Y, Z position</strong> of each object.</p>
+<h4 id="bakery-position">Bakery Position<a class="headerlink" href="#bakery-position" title="Permanent link">&para;</a></h4>
+<p>Similar to <strong>Position</strong>, but normalized to the <strong>0–1</strong> range.</p>
+<h4 id="random-island">Random Island<a class="headerlink" href="#random-island" title="Permanent link">&para;</a></h4>
+<p>Bakes a random value per <strong>Source Mesh</strong>. Useful for masking and variation.</p>
+<h4 id="color-attribute">Color Attribute<a class="headerlink" href="#color-attribute" title="Permanent link">&para;</a></h4>
+<p>Bakes a color attribute per <strong>Source Mesh</strong>. Default attribute name is <code>"Color"</code>.</p>
+<ul>
+<li><strong>Color Attribute:</strong> Default attribute name to bake. If the attribute does not exist on the Source Mesh, the result will be pure black.
+  This can be overridden per Source (see Sources).</li>
+</ul>
+<h4 id="custom">Custom<a class="headerlink" href="#custom" title="Permanent link">&para;</a></h4>
+<p>Custom bake target using a user-specified material on the Source Mesh.</p>
+<ul>
+<li><strong>Material:</strong> Material to be used for the bake.</li>
+<li><strong>Bake Type:</strong> Cycles bake type.</li>
+</ul>
+<hr />
+<h3 id="projection">Projection<a class="headerlink" href="#projection" title="Permanent link">&para;</a></h3>
+<p>Projection controls how Sources project onto Targets.</p>
+<ul>
+<li><strong>Cage Extrusion:</strong> Inflates the Target (or Cage) to help capture all details during projection.</li>
+<li><strong>Max Ray Distance:</strong> Limits how far projection rays can travel.</li>
+</ul>
+<p>Important: <strong>Apply object scale</strong> in Blender for consistent projection behavior.</p>
+<hr />
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h3>
+<p>Defines where and how baked images are saved.</p>
+<ul>
+<li><strong>Directory:</strong> Output directory (relative path). Default: <code>/bakes</code>.</li>
+<li><strong>Format:</strong> Output image format.</li>
+<li><strong>PNG</strong><ul>
+<li><strong>Color:</strong> RGB / RGBA</li>
+<li><strong>Color Depth:</strong> 8 / 16</li>
+<li><strong>Compression:</strong> slider (default: 15%)</li>
+</ul>
+</li>
+<li><strong>TGA</strong><ul>
+<li><strong>Color:</strong> RGB / RGBA</li>
+</ul>
+</li>
+</ul>
+<p><strong>File naming:</strong></p>
+<p><code>&lt;texture_set_name&gt;&lt;separator&gt;&lt;bake_target_name&gt;</code></p>
+<p>Example (separator <code>_</code>): <code>weapon_normal</code>, <code>weapon_ao</code>, <code>weapon_curvature</code></p>
+<hr />
+<h2 id="texture-sets_1">Texture Sets<a class="headerlink" href="#texture-sets_1" title="Permanent link">&para;</a></h2>
+<p>Texture Sets are managed as a list:
+- add / remove items
+- reorder items (up/down)
+- enable/disable baking per set (checkbox)
+- rename sets (name controls export filename prefix)</p>
+<p>Each Texture Set produces one output image per bake target, containing all Targets in that set.</p>
+<h3 id="override-render-settings">Override Render Settings<a class="headerlink" href="#override-render-settings" title="Permanent link">&para;</a></h3>
+<p>Per-set overrides use checkboxes. Only enabled overrides apply.</p>
+<ul>
+<li><strong>Resolution</strong> (per set)</li>
+<li><strong>Padding</strong> (per set)</li>
+<li><strong>Anti-Aliasing</strong> (per set)</li>
+</ul>
+<h3 id="override-bake-targets">Override Bake Targets<a class="headerlink" href="#override-bake-targets" title="Permanent link">&para;</a></h3>
+<p>Texture Sets can override which bake targets are used.</p>
+<ul>
+<li><strong>Mode:</strong></li>
+<li><strong>Add:</strong> Adds additional bake targets for this set on top of the global bake targets.</li>
+<li><strong>Replace:</strong> Uses only the bake targets listed here (replacing the global bake targets for this set).</li>
+<li>Includes add/remove/reorder controls like the global Bake Targets list.</li>
+</ul>
+<hr />
+<h2 id="targets_1">Targets<a class="headerlink" href="#targets_1" title="Permanent link">&para;</a></h2>
+<p>Targets are meshes that receive the bake (projection destination). Targets are managed as a list:
+- add / remove items
+- reorder items (up/down)
+- object picker (mesh objects only)</p>
+<p>Convenience: If mesh objects are selected when pressing <code>+</code>, an entry is created for each selected mesh.</p>
+<p>All Targets within the same Texture Set are baked into the same output image for each bake target.</p>
+<h3 id="override-projection-settings-per-target">Override Projection Settings (per Target)<a class="headerlink" href="#override-projection-settings-per-target" title="Permanent link">&para;</a></h3>
+<p>Per-target overrides use checkboxes. Only enabled overrides apply.</p>
+<ul>
+<li><strong>Cage:</strong> Optional custom cage object.</li>
+<li>If an object is selected when setting the override, it can be auto-filled into this slot.</li>
+<li><strong>Cage Extrusion:</strong> Overrides the extrusion value for this Target.</li>
+<li>Note: Even if a Cage object is provided, extrusion still applies to the cage.</li>
+<li>To use the cage exactly as-is, override Cage Extrusion to <strong>0.0</strong>.</li>
+<li><strong>Max Ray Distance:</strong> Overrides the maximum ray distance for this Target.</li>
+</ul>
+<p>If no Cage object is provided, the Target itself is used and extruded.</p>
+<hr />
+<h2 id="sources_1">Sources<a class="headerlink" href="#sources_1" title="Permanent link">&para;</a></h2>
+<p>Sources are only shown when a Target is selected. Each Target can have:
+- <strong>no Sources:</strong> the Target is treated as both Source and Target
+- <strong>one or more Sources:</strong> Sources are projected onto the Target</p>
+<p>Sources are managed as a list with add/remove/reorder controls.<br />
+Convenience: selecting multiple objects and pressing <code>+</code> adds them all.</p>
+<h3 id="per-source-settings">Per-Source Settings<a class="headerlink" href="#per-source-settings" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Color Attribute:</strong> Overrides the Color Attribute name for this Source (used by the Color Attribute bake target).</li>
+</ul>
+<hr />
+<h2 id="baking">Baking<a class="headerlink" href="#baking" title="Permanent link">&para;</a></h2>
+<p>Press <strong>BAKE</strong> to start baking.</p>
+<p>During the bake, Little Bakery displays:
+- which texture is currently baking
+- progress bar
+- a summary at the end (basic bake information)</p>
+<hr />
+<h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
+<p>The About section includes:
+- documentation link
+- version information
+- contact info
+- GitHub link</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
