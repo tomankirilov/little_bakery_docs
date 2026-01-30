@@ -365,15 +365,3 @@ During the bake, Little Bakery displays:
     
 
 ---
-
-## About
-
-The About section includes:
-
-- documentation link
-    
-- version information
-    
-- contact info
-    
-- GitHub link

@@ -58,3 +58,15 @@ General steps:
 3. Click **Install…** and select the downloaded ZIP.
     
 4. Enable **Little Bakery** in the add-ons list.
+
+---
+
+## About
+
+The About section includes:
+    
+- v1.0.0 (Pale Buns)
+    
+- [Contacts](https://tomanov.art/category/portfolio/)
+    
+- [GitHub](https://github.com/tomankirilov/little_bakery/tree/1.0-pale-buns)
